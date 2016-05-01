@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use App\Info;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -28,7 +29,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new authentication controller instance.
@@ -71,13 +72,15 @@ class AuthController extends Controller
 
     protected function create(array $data)
     {
+        Info::insert(['username'=>$data['username'],
+            'status'=>'online',
+            ]);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'username'=>$data['username'],
             'password' => bcrypt($data['password'])
-            
-           
         ]);
     }
 }
