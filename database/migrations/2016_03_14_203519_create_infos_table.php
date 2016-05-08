@@ -23,7 +23,7 @@ class CreateInfosTable extends Migration
             $table->longText('my_scores');
             $table->longText('topics');
             $table->longText('questions_to_play');
-            $table->longText('opponent_scores')
+            $table->longText('opponent_scores');
             $table->integer('updated_at');
         });
     }
